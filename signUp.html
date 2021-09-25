@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link
+      rel="icon"
+      href="https://cdn.shopper.in/images/store-logos/mobile-shoppersstop-com.png"
+      type="image/icon type"
+    />
+  </head>
+  <style>
+    form {
+      width: 50%;
+      height: 600px;
+      margin: auto;
+      background: rgb(228, 227, 227);
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      justify-content: center;
+      align-items: center;
+    }
+    form > input {
+      width: 400px;
+      height: 50px;
+      padding: 5px;
+    }
+    header {
+      width: 50%;
+      height: 100px;
+      display: flex;
+      margin: auto;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      color: #ffffff;
+      font-family: "Playfair Display", serif;
+    }
+  </style>
+  <body>
+    <header>
+      <h1>Sign Up</h1>
+    </header>
+
+    <form onsubmit="signup(event)" id="myForm" action="">
+      <input type="text" id="name" placeholder="Name" />
+      <input type="text" id="email" placeholder="Email" />
+      <input type="password" id="password" placeholder="Password" />
+
+      <input type="submit" value="Create Account" />
+      <p>Already have an account <a href="signIn.html">Sign In</a></p>
+    </form>
+  </body>
+</html>
+
+<script>
+  function signup(e) {
+    e.preventDefault();
+
+    let myForm = document.getElementById("myForm");
+    var n = document.getElementById("name");
+    let em = document.getElementById("email");
+    let pass = document.getElementById("password");
+
+    let name = myForm.name.value;
+    let email = myForm.email.value;
+    let password = myForm.password.value;
+
+    if (localStorage.getItem("users") === null) {
+      localStorage.setItem("users", JSON.stringify([]));
+    }
+    if (name.length == 0 || email.length == 0 || password.length == 0) {
+      alert("Please fill all the details");
+    } else {
+      let user = {
+        name,
+        email,
+        password,
+      };
+
+      let arr = JSON.parse(localStorage.getItem("users"));
+
+      arr.push(user);
+
+      localStorage.setItem("users", JSON.stringify(arr));
+
+      alert("Account created successfully");
+    }
+
+    n.value = "";
+    em.value = "";
+    pass.value = "";
+  }
+</script>

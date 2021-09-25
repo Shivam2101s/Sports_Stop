@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart</title>
+    <link rel="icon" href="https://cdn.shopper.in/images/store-logos/mobile-shoppersstop-com.png" type="image/icon type">
+    <style>
+      #products {
+        margin: 5% 5% 10% 5%;
+        display: grid;
+        grid-template-columns: 20% 20% 20% 20%;
+        grid-gap: 5%;
+        justify-content: center;
+      }
+
+      img {
+        width: 80%;
+        height: 80%;
+      }
+
+      div > div {
+        background-color: rgb(233, 231, 231);
+        text-align: center;
+        padding: 10px;
+        height: min-content;
+      }
+      header {
+        width: 100%;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+        color: #ffffff;
+        font-family: "Playfair Display", serif;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Wishlist</h1>
+    </header>
+
+    <div id="products"></div>
+  </body>
+</html>
+
+<script>
+  let parent = document.getElementById("products");
+
+  let cart = JSON.parse(localStorage.getItem("wishlist"));
+  console.log("wishlist:", wishlist);
+
+  function showProducts() {
+    wishlist.forEach(function (product) {
+      console.log(product);
+
+      let div = document.createElement("div");
+
+      let img = document.createElement("img");
+
+      img.src = product.img;
+
+      let product_price = document.createElement("p");
+
+      product_price.textContent = `Rs ${product.price}`;
+
+      let product_name = document.createElement("p");
+
+      product_name.textContent = product.name;
+
+      let product_quanity = document.createElement("p");
+
+      product_quanity = product.quantity;
+
+      let removefromwishlist_btn = document.createElement("button");
+
+      removefromwishlist_btn.innerText = "Remove from Wishlist";
+
+      removefromwishlist_btn.addEventListener('click',function(){
+          let index = wishlist.indexOf(product)
+          console.log(index)
+          wishlist.splice(index,1)
+          
+      })
+
+      div.append(img, product_name, product_price, removefromcart_btn);
+
+      parent.append(div);
+    });
+  }
+
+  
+
+  showProducts();
+
+  function removefromwishlist(name) {
+    //   let product_cart = JSON.parse(localStorage.getItem("cart"));
+
+    // product_cart.push(p);
+
+    // localStorage.setItem("cart", JSON.stringify(product_cart));
+
+    // console.log("product_cart:", product_cart);
+
+    // alert("Product succesfully added to cart");
+
+    alert(name);
+  }
+</script>
