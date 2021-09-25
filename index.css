@@ -84,7 +84,7 @@ select {
 marquee {
   height: 40px;
   font-size: 18px;
-  background-color: rgb(201, 198, 198);
+  background-color: rgb(175, 174, 174);
   display: flex;
   align-items: center;
 }
