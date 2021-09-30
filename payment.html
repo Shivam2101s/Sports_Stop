@@ -4,13 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign Up</title>
+    <title>Payment</title>
     <link
       rel="icon"
       href="https://cdn.shopper.in/images/store-logos/mobile-shoppersstop-com.png"
       type="image/icon type"
     />
-    
   </head>
   <style>
     form {
@@ -24,6 +23,7 @@
       justify-content: center;
       align-items: center;
     }
+
     form > input {
       width: 400px;
       height: 40px;
@@ -31,6 +31,7 @@
       border: white;
       border-radius: 4px;
     }
+
     header {
       width: 50%;
       height: 100px;
@@ -40,69 +41,50 @@
       align-items: center;
       background: #000;
       color: #ffffff;
+      font-family: "Playfair Display", serif;
     }
     .btn {
       width: 400px;
       color: #ffffff;
-      height: 40px;
+      text-decoration: none;
       border-radius: 20px;
       background: black;
       margin: 10px;
-      padding: 2px;
+      padding: 10px;
+      text-align: center;
     }
   </style>
   <body>
     <header>
-      <h1>Sign Up</h1>
+      <h1>Payment</h1>
     </header>
-
-    <form onsubmit="signup(event)" id="myForm" action="">
+    <form id="myForm" onsubmit="payments(event)">
       <input type="text" id="name" placeholder="Name" required />
-      <input type="text" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-
-      <input type="submit" class="btn" value="Create Account" />
-      <p>Already have an account <a href="signIn.html">Sign In</a></p>
+      <input type="text" id="card" placeholder="Card Number" required />
+      <input type="date" placeholder="Expiry Date" required />
+      <input type="text" id="cvv" placeholder="CVV" required />
+      <input type="submit" class="btn" value="Pay" />
     </form>
   </body>
 </html>
-
 <script>
-  function signup(e) {
+  function payments(e) {
     e.preventDefault();
-
     let myForm = document.getElementById("myForm");
-    var n = document.getElementById("name");
-    let em = document.getElementById("email");
-    let pass = document.getElementById("password");
 
     let name = myForm.name.value;
-    let email = myForm.email.value;
-    let password = myForm.password.value;
+    let card = myForm.card.value;
+    let cvv = myForm.cvv.value;
 
-    if (localStorage.getItem("users") === null) {
-      localStorage.setItem("users", JSON.stringify([]));
+    if (name.length == 0) {
+      alert("Please provide correct details");
+    }else if(card.length != 16) {
+      alert("Invalid card number");
+    }else if(cvv.length != 3) {
+      alert("Invalid CVV");
+    }else {
+      alert("Payment Successfull, Order Placed");
+       window.location.href = "index.html";
     }
-    if (name.length == 0 || email.length == 0 || password.length == 0) {
-      alert("Please fill all the details");
-    } else {
-      let user = {
-        name,
-        email,
-        password,
-      };
-
-      let arr = JSON.parse(localStorage.getItem("users"));
-
-      arr.push(user);
-
-      localStorage.setItem("users", JSON.stringify(arr));
-
-      alert("Account created successfully");
-    }
-
-    n.value = "";
-    em.value = "";
-    pass.value = "";
   }
 </script>

@@ -5,26 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cart</title>
-    <link rel="icon" href="https://cdn.shopper.in/images/store-logos/mobile-shoppersstop-com.png" type="image/icon type">
+    <link
+      rel="icon"
+      href="https://cdn.shopper.in/images/store-logos/mobile-shoppersstop-com.png"
+      type="image/icon type"
+    />
     <style>
+      :root {
+        --primary-color: black;
+      }
       #products {
-        margin: 5% 5% 10% 5%;
+        width: 85%;
+        margin: auto;
         display: grid;
-        grid-template-columns: 20% 20% 20% 20%;
-        grid-gap: 5%;
-        justify-content: center;
+        grid-template: 'div div div div';
+        gap: 5%;
       }
-
       img {
-        width: 80%;
-        height: 80%;
+        width: 200px;
+        height: 200px;
       }
 
-      div > div {
+      #products > div {
         background-color: rgb(233, 231, 231);
         text-align: center;
         padding: 10px;
         height: min-content;
+        border-radius: 12px;
+        box-shadow: -2px -2px 5px grey, 2px 2px 5px grey;
       }
       header {
         width: 100%;
@@ -32,9 +40,38 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #000;
+        background: var(--primary-color);
         color: #ffffff;
-        font-family: "Playfair Display", serif;
+      }
+      .removeFromCart {
+        width: 200px;
+        color: #ffffff;
+        height: 30px;
+        border-radius: 15px;
+        background: black;
+        margin: 10px;
+        padding: 2px;
+      }
+      .total {
+        width: 98.8%;
+        height: 50px;
+        font-size: 18px;
+        font-weight: 500;
+        background-color: rgb(233, 231, 231);
+        float: right;
+        text-align: right;
+        padding-right: 20px;
+      }
+      .btn {
+        width: 250px;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 20px;
+        background: black;
+        margin: 20px;
+        padding: 10px;
+        text-align: center;
+        float: right;
       }
     </style>
   </head>
@@ -42,7 +79,9 @@
     <header>
       <h1>Your Cart</h1>
     </header>
-
+    <div class="total"></div>
+    <button onclick="allcartRemove()" class="btn">Clear Cart</button>
+    <a href="checkout.html" class="btn">Proceed to Checkout</a>
     <div id="products"></div>
   </body>
 </html>
@@ -52,13 +91,23 @@
 
   let cart = JSON.parse(localStorage.getItem("cart"));
   console.log("cart:", cart);
+  let total = 0;
+  function totalCartValue() {
+    let totalDivs = document.querySelector(".total");
+   
+    cart.forEach(function (el) {
+      let p = +el.price;
+      total += p;
+    });
+    totalDivs.innerHTML = `<p>Grand Total: Rs ${total}  </p>`;
+  }
+  totalCartValue();
 
   function showProducts() {
     cart.forEach(function (product) {
       console.log(product);
 
       let div = document.createElement("div");
-
       let img = document.createElement("img");
 
       img.src = product.img;
@@ -76,23 +125,20 @@
       product_quanity = product.quantity;
 
       let removefromcart_btn = document.createElement("button");
-
+      removefromcart_btn.setAttribute("class", "removeFromCart");
       removefromcart_btn.innerText = "Remove from Cart";
 
-      removefromcart_btn.addEventListener('click',function(){
-          let index = cart.indexOf(product)
-          console.log(index)
-          cart.splice(index,1)
-          
-      })
+      removefromcart_btn.addEventListener("click", function () {
+        //   let index = cart.indexOf(product)
+        //   console.log(index)
+        //   cart.splice(index,1)
+      });
 
       div.append(img, product_name, product_price, removefromcart_btn);
 
       parent.append(div);
     });
   }
-
-  
 
   showProducts();
 
@@ -108,5 +154,14 @@
     // alert("Product succesfully added to cart");
 
     alert(name);
+
+
+    
   }
+
+  function allcartRemove(){
+      localStorage.removeItem('cart');
+      parent.innerHTML=null;
+      total.innerHTML= 0 ;
+    }
 </script>

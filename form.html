@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link
+    rel="icon"
+    href="https://cdn.shopper.in/images/store-logos/mobile-shoppersstop-com.png"
+    type="image/icon type"
+  />
+</head>
+<style>
+form {
+    width: 50%;
+    height: 600px;
+    margin: auto;
+    background: rgb(228, 227, 227);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+  }
+  form > input {
+    width: 400px;
+    height: 40px;
+    padding: 5px;
+    border: white;
+    border-radius: 4px;
+  }
+
+  header {
+    width: 50%;
+    height: 100px;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    color: #ffffff;
+    font-family: "Playfair Display", serif;
+  }
+  .btn {
+    width: 400px;
+    color: #ffffff;
+    height: 40px;
+    border-radius: 20px;
+    background: black;
+    margin: 10px;
+    padding: 2px;
+  }
+</style>
+<body>
+  <header>
+    <h1>Add Products</h1>
+  </header>
+
+  <form onsubmit="Addproduct(event)" id="myForm" action="">
+    <a href="index.html">Home</a>
+    <input type="text" id="name" placeholder="Product Name" required />
+    <input type="number" id="price" placeholder="Price" required />
+    <input type="text" id="image" placeholder="Image" required />
+    <input type="submit" class="btn" value="Add" />
+
+  </form>
+</body>
+</html>
+
+<script>
+    let allproducts = JSON.parse(localStorage.getItem('allData')) || []
+function Addproduct(e) {
+    e.preventDefault();
+
+        let myForm = document.getElementById("myForm");
+
+        let name = myForm.name.value;
+        let price = myForm.price.value;
+        let image = myForm.image.value;
+
+        if(localStorage.getItem("myUsers")=== null){
+            localStorage.setItem("myUsers", JSON.stringify([]));
+
+        }
+
+        let data = {
+            name,
+            price,
+            image,
+        }
+        console.log(allproducts)
+        let arr = JSON.parse(localStorage.getItem("myUsers"));
+
+        arr.push(data);
+
+        localStorage.setItem("myUsers", JSON.stringify(arr));
+        console.log(arr);
+    }
+</script>

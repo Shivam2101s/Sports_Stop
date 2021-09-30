@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign In</title>
+    <title>Check Out</title>
     <link
       rel="icon"
       href="https://cdn.shopper.in/images/store-logos/mobile-shoppersstop-com.png"
@@ -23,6 +23,7 @@
       justify-content: center;
       align-items: center;
     }
+
     form > input {
       width: 400px;
       height: 40px;
@@ -43,47 +44,26 @@
       font-family: "Playfair Display", serif;
     }
     .btn {
-      width: 400px;
+        width: 400px;
       color: #ffffff;
-      height: 40px;
+      text-decoration: none;
       border-radius: 20px;
       background: black;
       margin: 10px;
-      padding: 2px;
+      padding: 10px;
+      text-align: center;
     }
   </style>
   <body>
     <header>
-      <h1>Sign In</h1>
+      <h1>Checkout</h1>
     </header>
-
-    <form onsubmit="signin(event)" id="myForm" action="">
-      <input type="text" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-      <input type="submit" class="btn" value="Sign In" />
-      <p>Create new account <a href="signUp.html">Sign Up</a></p>
+    <form action="">
+      <input type="text" placeholder="Name" required />
+      <input type="number" placeholder="Contact No." required />
+      <input type="text" placeholder="Address" required />
+      <input type="Number" placeholder="PIN Code" required />
+      <a href="payment.html" class="btn">Proceed to Payment</a>
     </form>
   </body>
 </html>
-
-<script>
-  function signin(e) {
-    e.preventDefault();
-
-    let myForm = document.getElementById("myForm");
-    let email = myForm.email.value;
-    let password = myForm.password.value;
-
-    let all_users = JSON.parse(localStorage.getItem("users"));
-
-    all_users.forEach(function (user) {
-      if (email == user.email && password == user.password) {
-        alert("Logged in Succesfully");
-
-        window.location.href = "index.html";
-      } else {
-        alert("Invalid Email or Password");
-      }
-    });
-  }
-</script>

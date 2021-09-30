@@ -73,7 +73,7 @@ select {
   background-color: rgb(233, 231, 231);
   text-align: center;
   padding: 20px;
-  box-shadow: -2px -2px 5px #444,2px 2px 5px #444;
+  box-shadow: -2px -2px 5px #444, 2px 2px 5px #444;
   line-height: 25px;
   transition: transform 0.2s;
   border-radius: 12px;
@@ -95,17 +95,14 @@ footer {
   background: black;
   color: white;
 }
-.addToCartBtn {
-  width: 100px;
-  height: 25px;
-  border: 3px solid white;
-  background: rgb(230, 227, 227);
-  margin: 10px;
-}
+.addToCartBtn,
 .addToWishlistBtn {
-  width: 100px;
-  height: 25px;
+  width: 120px;
+  color: #ffffff;
+  height: 30px;
+  border-radius: 15px;
   border: 3px solid white;
-  background: rgb(230, 227, 227);
+  background: black;
   margin: 10px;
+  padding: 2px;
 }

@@ -4,8 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cart</title>
-    <link rel="icon" href="https://cdn.shopper.in/images/store-logos/mobile-shoppersstop-com.png" type="image/icon type">
+    <title> Wishlist</title>
+    <link
+      rel="icon"
+      href="https://cdn.shopper.in/images/store-logos/mobile-shoppersstop-com.png"
+      type="image/icon type"
+    />
+   
     <style>
       #products {
         margin: 5% 5% 10% 5%;
@@ -16,8 +21,8 @@
       }
 
       img {
-        width: 80%;
-        height: 80%;
+        width: 200px;
+        height: 200px;
       }
 
       div > div {
@@ -25,6 +30,8 @@
         text-align: center;
         padding: 10px;
         height: min-content;
+        border-radius: 12px;
+        box-shadow: -2px -2px 5px grey, 2px 2px 5px grey;
       }
       header {
         width: 100%;
@@ -34,7 +41,15 @@
         align-items: center;
         background: #000;
         color: #ffffff;
-        font-family: "Playfair Display", serif;
+      }
+      .removefromwishlist_btn {
+        width: 200px;
+        color: #ffffff;
+        height: 30px;
+        border-radius: 15px;
+        background: black;
+        margin: 10px;
+        padding: 2px;
       }
     </style>
   </head>
@@ -50,7 +65,7 @@
 <script>
   let parent = document.getElementById("products");
 
-  let cart = JSON.parse(localStorage.getItem("wishlist"));
+  let wishlist = JSON.parse(localStorage.getItem("wishlist"));
   console.log("wishlist:", wishlist);
 
   function showProducts() {
@@ -78,21 +93,19 @@
       let removefromwishlist_btn = document.createElement("button");
 
       removefromwishlist_btn.innerText = "Remove from Wishlist";
+      removefromwishlist_btn.setAttribute("class", "removefromwishlist_btn");
 
-      removefromwishlist_btn.addEventListener('click',function(){
-          let index = wishlist.indexOf(product)
-          console.log(index)
-          wishlist.splice(index,1)
-          
-      })
+      removefromwishlist_btn.addEventListener("click", function () {
+        let index = wishlist.indexOf(product);
+        console.log(index);
+        wishlist.splice(index, 1);
+      });
 
-      div.append(img, product_name, product_price, removefromcart_btn);
+      div.append(img, product_name, product_price, removefromwishlist_btn);
 
       parent.append(div);
     });
   }
-
-  
 
   showProducts();
 

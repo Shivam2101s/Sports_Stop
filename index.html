@@ -7,49 +7,51 @@
     <title>Sports Stop</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="icon" href="https://cdn.shopper.in/images/store-logos/mobile-shoppersstop-com.png" type="image/icon type">
+    <link
+      rel="icon"
+      href="https://cdn.shopper.in/images/store-logos/mobile-shoppersstop-com.png"
+      type="image/icon type"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
       rel="stylesheet"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap"
-     rel="stylesheet">
-     <link rel="stylesheet" href="./index.css">
-    <style>
-       
-    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <style></style>
   </head>
   <body>
     <header>
       <h1>SPORTS STOP</h1>
     </header>
     <marquee behavior="scroll" direction="left">
-      Welcome to Sports Stop 
-      <span style="margin-left:200px;"></span> 
-     20% off on First Order
-     <span style="margin-left:200px;"></span> 
-     Free Delivery on All Orders
-  </marquee>
+      Welcome to Sports Stop
+      <span style="margin-left: 200px"></span>
+      20% off on First Order
+      <span style="margin-left: 200px"></span>
+      Free Delivery on All Orders
+    </marquee>
     <div class="options">
       <select name="" id="sortbyPrice" onchange="sortWithPrice()">
         <option value="">Sort by Price</option>
         <option value="lowtoHigh">Low To High</option>
         <option value="HighToLow">Hight to low</option>
       </select>
-      
+
       <a href="wishlist.html"><button class="wishlistBtn">Wishlist</button></a>
       <a href="cart.html"><button class="cartBtn">Go to Cart</button></a>
       <a href="signUp.html"><button class="signUpBtn">Sign Up</button></a>
-
     </div>
     <div id="products"></div>
-    <footer>
-
-    </footer>
+    <footer></footer>
   </body>
 </html>
 
 <script>
+  let allProducts = JSON.parse(localStorage.getItem('allProducts')) || []
   let data = [
     {
       name: "Asics Runing Shoes",
@@ -115,12 +117,12 @@
       name: "PSG Football Jersy",
       price: "2200",
       img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSXsMFNmzlwCGFiJ2Uy5GH9vGYSA1e-OU2RqeAhyN7z17kGwKVge6OsEA1xJvOdwGTz43KSNfxvJ1mvE8PMEDRQwpM5KT8rnv3r3jp3Ty7HLRFl7mL-9nd2kA&usqp=CAE",
-        },
+    },
     {
       name: "PUBG JERSEY",
       price: "1099",
       img: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTdVP32UHJryKgPEwnZ4cRSy0JYcngTT6vZh_MJDzr9eC-EaQfn-4HBBzpIRx8na9XAW6LcqEhzK0x6o8r3udbCt8eLm5Bn3qRa3CtbfBvT0FfM4wot_qUxzw&usqp=CAE",
-        },
+    },
     {
       name: "Chennai Super Kings Jersy",
       price: "1699",
@@ -133,6 +135,16 @@
     },
   ];
 
+  function setItemsintoLocal(){
+    data.forEach(function(item){
+      allProducts.push(item)
+      localStorage.setItem('allData',JSON.stringify(allProducts))
+    })
+  }
+  setItemsintoLocal()
+
+  // localStorage.setItem(JSON.stringify('allProducts',data))
+
   let parent = document.getElementById("products");
 
   function showProducts() {
@@ -140,7 +152,7 @@
       console.log(product.name);
 
       let div = document.createElement("div");
-      div.setAttribute('class','productDiv')
+      div.setAttribute("class", "productDiv");
 
       let img = document.createElement("img");
 
@@ -156,22 +168,21 @@
 
       let wishlist_btn = document.createElement("button");
 
-       wishlist_btn.innerText = "Add to Wishlist";
-       wishlist_btn.setAttribute('class',"addToWishlistBtn")
-       wishlist_btn.onclick = function () {
-       addtoWishlist(product);
-        };
-      
+      wishlist_btn.innerText = "Add to Wishlist";
+      wishlist_btn.setAttribute("class", "addToWishlistBtn");
+      wishlist_btn.onclick = function () {
+        addtoWishlist(product);
+      };
+
       let addtocart_btn = document.createElement("button");
 
       addtocart_btn.innerText = "Add to Cart";
-      addtocart_btn.setAttribute('class',"addToCartBtn")
+      addtocart_btn.setAttribute("class", "addToCartBtn");
       addtocart_btn.onclick = function () {
         addtoCart(product);
-
       };
 
-      div.append(img, product_name, product_price, addtocart_btn,wishlist_btn);
+      div.append(img, product_name, product_price, addtocart_btn, wishlist_btn);
 
       parent.append(div);
     });
@@ -196,8 +207,6 @@
   }
   let product_wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
   function addtoWishlist(p) {
-    
-
     product_wishlist.push(p);
 
     localStorage.setItem("wishlist", JSON.stringify(product_wishlist));
@@ -206,7 +215,6 @@
 
     alert("Product added to wishlist");
   }
-
 
   function sortWithPrice() {
     let sortings = document.getElementById("sortbyPrice").value;
@@ -227,6 +235,4 @@
       showProducts();
     }
   }
-
-
 </script>
